@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include"list.hpp"
+#include<memory>
 
 struct graphnode{
     int id;

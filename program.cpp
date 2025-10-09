@@ -1,5 +1,7 @@
 #include"program.hpp"
 
+SDL_Renderer* program::renderer = nullptr;
+
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
     this->renderer = nullptr;
@@ -42,5 +44,5 @@ void program::clean(){
     SDL_DestroyWindow(this->window);
     SDL_DestroyRenderer(this->renderer);
     SDL_Quit();
-    cout<< "Destroyed window\n";
+    cout<< "Window Destroyed\n";
 }

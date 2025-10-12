@@ -7,8 +7,12 @@ private:
     SDL_FRect destR;
     int mp[20][25];
 public:
+    SDL_Texture* green;
+    SDL_Texture* blue;
+    SDL_Texture* brown;
+
     map();
     ~map();
-    void load_map(vector<vector<int>> arr);
+    void load_map(int arr[20][25]);
     void draw_map();
 };

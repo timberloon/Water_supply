@@ -1,6 +1,8 @@
 #include"program.hpp"
+#include"map.hpp"
 
 SDL_Renderer* program::renderer = nullptr;
+map* main_map;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -9,7 +11,7 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
         if(SDL_CreateWindowAndRenderer(title.c_str(),width,height,flag,&(this->window),&(this->renderer))){
             cout<< "Window created\n";
             this->running = true;
-            SDL_SetRenderDrawColor(this->renderer,255,255,255,255);
+            SDL_SetRenderDrawColor(this->renderer,0,0,0,255);
         }
         else{
             cout<< "failed to create window\n";
@@ -20,9 +22,9 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
         cout<< "SDL_Init failed\n";
         this->running = false;
     }
+    main_map = new map();
+    // main_map->draw_map();
 
-    //sdl init -> sdl create window and renderer
-    //all else is bullshi*t
 }
 
 void program::update(){
@@ -31,6 +33,7 @@ void program::update(){
 
 void program::render(){
     SDL_RenderClear(renderer);
+    main_map->draw_map();
     SDL_RenderPresent(renderer);
 }
 

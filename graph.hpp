@@ -9,12 +9,13 @@ struct graphnode{
     mlist<int> edges;
 };
 
-template<int n>
 class u_graph{
 private:
-    graphnode* nodes[n];
-    bool space[n];
+    vector<graphnode*> nodes;
+    vector<bool> space;
     int curr;
+
+    void re_size();
 public:
     u_graph();
     ~u_graph();

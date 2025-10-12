@@ -8,6 +8,6 @@ SDL_Texture* texmanager::load_texture(const char* tex){
     return texture;
 }
 
-void texmanager::draw(SDL_Texture* tex,SDL_FRect* rect){
-    SDL_RenderTexture(program::renderer,tex,NULL,rect);
+void texmanager::draw(SDL_Texture* tex,SDL_FRect rect){
+    SDL_RenderTexture(program::renderer,tex,NULL,&rect);
 }

@@ -2,6 +2,7 @@
 #include<iostream>
 #include<SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
+#include<ctime>
 #include"graph.hpp"
 #include"texmanager.hpp"
 

@@ -1,8 +1,9 @@
+#pragma once
 #include"object.hpp"
 
 class house : public object{
 private: int h_no;
 public:
-    house(int num,std::string tex,int x,int y,int width,int height);
+    house(int num,int x,int y);
     void update() override;
 };

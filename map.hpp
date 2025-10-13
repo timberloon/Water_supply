@@ -5,8 +5,8 @@ class map{
 private:
     vector<SDL_Texture*> textures;
     SDL_FRect destR;
+    public:
     int mp[20][25];
-public:
     SDL_Texture* green;
     SDL_Texture* blue;
     SDL_Texture* brown;

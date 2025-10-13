@@ -1,8 +1,11 @@
 #include"program.hpp"
 #include"map.hpp"
+#include"house.hpp"
+#include"algorithms.hpp"
 
 SDL_Renderer* program::renderer = nullptr;
 map* main_map;
+vector<house*> houses;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -23,17 +26,23 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
         this->running = false;
     }
     main_map = new map();
-    // main_map->draw_map();
-
+    srand(time(NULL));
+    for(int i=0;i<5;i++){
+        int temp1,temp2;
+        pos_generate(temp1,temp2);
+        houses.push_back(new house(i,temp1,temp2));
+    }
+    clean_house_buffer();
 }
 
 void program::update(){
-
+    
 }
 
 void program::render(){
     SDL_RenderClear(renderer);
     main_map->draw_map();
+    for(house* h : houses) h->render();
     SDL_RenderPresent(renderer);
 }
 

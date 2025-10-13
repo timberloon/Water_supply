@@ -1,7 +1,8 @@
 #include"house.hpp"
 
-house::house(int num,std::string tex,int x,int y,int width,int height) : object(tex,x,y,width,height){
+house::house(int num,int x,int y) : object(x,y){
     this->h_no = num;
+    this->texture = "assets/house3.png";
 }
 
 void house::update(){

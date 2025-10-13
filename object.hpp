@@ -1,16 +1,19 @@
 #include"program.hpp"
+#include"vector2.hpp"
 
 class object{
 private:
     SDL_Renderer* renderer;
 
 protected:
-    SDL_FRect* destR;
+    SDL_FRect destR;
     const char* texture;
-    int xpos,ypos;
 
 public:
-    object(std::string str,int x ,int y,int width,int height);
+    int xpos,ypos;
+    object(std::string str,int x ,int y);
+    object(int x,int y);
     virtual void update() = 0;
     void render();
+    vec2 get_texture_dimensions();
 };

@@ -27,12 +27,14 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     }
     main_map = new map();
     srand(time(NULL));
-    for(int i=0;i<5;i++){
+    for(int i=0;i<10;i++){
         int temp1,temp2;
         pos_generate(temp1,temp2);
         houses.push_back(new house(i,temp1,temp2));
     }
     clean_house_buffer();
+
+    static_render();
 }
 
 void program::update(){
@@ -40,6 +42,10 @@ void program::update(){
 }
 
 void program::render(){
+    
+}
+
+void program::static_render(){
     SDL_RenderClear(renderer);
     main_map->draw_map();
     for(house* h : houses) h->render();

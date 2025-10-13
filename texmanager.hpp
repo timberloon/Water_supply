@@ -1,7 +1,7 @@
 #pragma once
 #include"program.hpp"
 
-const float house_scale = 2.0;
+const float house_scale = 1.5;
 
 class texmanager{
 public:

@@ -27,8 +27,15 @@ inline void pos_generate(int& a,int& b){
 
     float maxi = 0;
     int idx = 0;
+    bool flag = false;
     for(int i=0;i<10;i++){
         if(distances[i] > maxi){
+            flag = false;
+            for(int k=0;k<points.size();k++){
+                vec2 temp(arr[i]-*points[k]);
+                if(temp.mod() < 80)flag = true;
+            }
+            if(flag) continue;
             maxi = distances[i];
             idx = i;
         }

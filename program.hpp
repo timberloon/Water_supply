@@ -18,6 +18,7 @@ public:
     void render();
     void clean();
     void handle_events();
+    void static_render();
     bool is_running(){return running;}
 
 };

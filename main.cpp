@@ -5,7 +5,7 @@ int main(){
     const int framedelay = 1000/fps;
 
     program* newprogram = new program();
-    newprogram->init("new window",800,600,SDL_WINDOW_RESIZABLE);
+    newprogram->init("new window",window_width,window_height,SDL_WINDOW_RESIZABLE);
 
     Uint32 framestart;
     int frametime;

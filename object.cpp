@@ -5,13 +5,13 @@ object::object(std::string str,int x,int y){
     texture = str.c_str();
     destR.x = x;
     destR.y = y;
-    xpos = x;
-    ypos = y;
+    position.x = x;
+    position.y = y;
 }
 
 object::object(int x,int y){
-    xpos = x;
-    ypos = y;
+    position.x = x;
+    position.y = y;
     destR.x = x;
     destR.y = y;
 }

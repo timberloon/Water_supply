@@ -1,11 +1,12 @@
 #include"program.hpp"
 #include"map.hpp"
 #include"house.hpp"
-#include"algorithms.hpp"
+#include"sampler.hpp"
 
 SDL_Renderer* program::renderer = nullptr;
 map* main_map;
 vector<house*> houses;
+sampler plotter;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -27,12 +28,13 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     }
     main_map = new map();
     srand(time(NULL));
-    for(int i=0;i<10;i++){
-        int temp1,temp2;
-        pos_generate(temp1,temp2);
-        houses.push_back(new house(i,temp1,temp2));
+    std::vector<vec2> house_coords;
+    plotter.poission_sampling(5,house_coords);
+    for(int i=0;i<house_coords.size();i++){
+        houses.push_back(new house(i,house_coords[i].x,house_coords[i].y));
+        std::cout<< house_coords[i].x << ' ' << house_coords[i].y << '\n';
     }
-    clean_house_buffer();
+    
 
     static_render();
 }

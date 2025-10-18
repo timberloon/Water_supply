@@ -10,4 +10,5 @@ public:
 
     float mod();
     vec2 operator-(vec2& other);
+    float distance(vec2 other);
 };

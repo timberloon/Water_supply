@@ -10,7 +10,7 @@ protected:
     const char* texture;
 
 public:
-    int xpos,ypos;
+    vec2 position;
     object(std::string str,int x ,int y);
     object(int x,int y);
     virtual void update() = 0;

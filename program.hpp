@@ -1,10 +1,16 @@
 #pragma once
 #include<iostream>
+#include<memory>
+#include<math.h>
 #include<SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
 #include<ctime>
 #include"graph.hpp"
 #include"texmanager.hpp"
+#include"vector2.hpp"
+
+constexpr int window_width = 800;
+constexpr int window_height = 600;
 
 class program{
 private:

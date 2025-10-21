@@ -1,10 +1,10 @@
 #include<iostream>
-#include<ctime>
+#include"vector2.hpp"
 
 int main(){
-    srand(time(NULL));
-    for(int i=0;i<50;i++){
-        int temp = (rand()%50)+1;
-        std::cout<< temp << ' ';
-    }
+    vec2 one(1,1);
+    vec2 two(1,1);
+    vec2 three(2,4);
+
+    std::cout<< (one==two) << ' ' << (one==three);
 }

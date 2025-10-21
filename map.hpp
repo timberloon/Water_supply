@@ -15,4 +15,6 @@ private:
     ~map();
     void load_map(int arr[20][25]);
     void draw_map();
+    void update_map(int x, int y, int house_w, int house_h);
+    void show_map();
 };

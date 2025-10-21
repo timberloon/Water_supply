@@ -2,11 +2,14 @@
 #include"map.hpp"
 #include"house.hpp"
 #include"sampler.hpp"
+#include"background.hpp"
+#include"algorithms.hpp"
 
 SDL_Renderer* program::renderer = nullptr;
 map* main_map;
 vector<house*> houses;
 sampler plotter;
+background* bg = new background();
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -29,12 +32,12 @@ void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     main_map = new map();
     srand(time(NULL));
     std::vector<vec2> house_coords;
-    plotter.poission_sampling(5,house_coords);
+    plotter.poission_sampling(4,house_coords);
+    vec2 house_dimensions = get_image_dimensions("assets/house3.png");
     for(int i=0;i<house_coords.size();i++){
         houses.push_back(new house(i,house_coords[i].x,house_coords[i].y));
-        std::cout<< house_coords[i].x << ' ' << house_coords[i].y << '\n';
+        main_map->update_map((int)house_coords[i].x,(int)house_coords[i].y,house_dimensions.x,house_dimensions.y);
     }
-    
 
     static_render();
 }
@@ -44,13 +47,16 @@ void program::update(){
 }
 
 void program::render(){
-    
+    // SDL_RenderClear(renderer);
+    // main_map->draw_map();
+    // SDL_RenderPresent(renderer);
 }
 
 void program::static_render(){
     SDL_RenderClear(renderer);
+    bg->draw();
     main_map->draw_map();
-    for(house* h : houses) h->render();
+    for(house* h : houses)h->render();
     SDL_RenderPresent(renderer);
 }
 

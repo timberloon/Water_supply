@@ -52,16 +52,32 @@ void map::draw_map(){
             destR.y = row*32;
 
             switch(type){
-            case 0:
-                texmanager::draw(blue,destR);
-                break;
+            // case 0:
+            //     texmanager::draw(blue,destR);
+            //     break;
             case 1:
-                texmanager::draw(green,destR);
+                texmanager::draw(brown,destR);
                 break;
             case 2:
-                texmanager::draw(brown,destR);
+                texmanager::draw(green,destR);
                 break;
             }
         }
+    }
+}
+
+void map::update_map(int x, int y, int house_w, int house_h) {
+    int col = (x + house_w / 2) / 32;
+    int row = (y + house_h / 2) / 32;
+
+    if (row >= 0 && row < 20 && col >= 0 && col < 25) mp[row][col] = 1;
+}
+
+void map::show_map(){
+    for(int i=0;i<20;i++){
+        for(int j=0;j<25;j++){
+            std::cout<< mp[i][j] << ' ';
+        }
+        std::cout<< '\n';
     }
 }

@@ -28,6 +28,11 @@ vec2 vec2::operator-(vec2& other){
     return newvec;
 }
 
+bool vec2::operator==(vec2& other){
+    if(this->x == other.x && this->y == other.y) return true;
+    return false;
+}
+
 vec2::~vec2(){
     
 }

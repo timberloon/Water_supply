@@ -1,5 +1,6 @@
+#pragma once
 #include"program.hpp"
-#include"vector2.hpp"
+#include"sprite.hpp"
 
 class object{
 private:
@@ -7,7 +8,7 @@ private:
 
 protected:
     SDL_FRect destR;
-    const char* texture;
+    sprite Sprite;
 
 public:
     vec2 position;

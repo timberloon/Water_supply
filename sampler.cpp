@@ -1,7 +1,7 @@
 #include"sampler.hpp"
 
 sampler::sampler(){
-    rad = 200;
+    rad = 150;
     k = 100;
     house_dim = get_image_dimensions("assets/house3.png");
 }
@@ -34,7 +34,7 @@ bool sampler::check(std::vector<vec2>& houses,vec2 currpt){
 }
 
 void sampler::poission_sampling(int tries,vector<vec2>& houses){
-    vec2 start(window_width/2,window_height/2);
+    vec2 start((window_width/2)-house_dim.x/2,(window_height/2)-house_dim.y/2);
     active.push_back(start);
     houses.push_back(start);
     while(tries-- && !active.empty()){

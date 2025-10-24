@@ -8,9 +8,7 @@
 #include"graph.hpp"
 #include"texmanager.hpp"
 #include"vector2.hpp"
-
-constexpr int window_width = 800;
-constexpr int window_height = 600;
+#include"globals.hpp"
 
 class program{
 private:
@@ -20,6 +18,7 @@ public:
     static SDL_Renderer* renderer;
 
     void init(std::string title,int width,int height,SDL_WindowFlags flag);
+    void start();
     void update();
     void render();
     void clean();

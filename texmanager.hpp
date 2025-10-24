@@ -1,8 +1,6 @@
 #pragma once
 #include"program.hpp"
 
-const float house_scale = 2;
-
 class texmanager{
 public:
     static SDL_Texture* load_texture(const char* tex);

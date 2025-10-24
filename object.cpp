@@ -1,8 +1,8 @@
 #include"object.hpp"
-#include"texmanager.hpp"
 
 object::object(std::string str,int x,int y){
-    texture = str.c_str();
+    sprite temp(str.c_str());
+    this->Sprite = temp;
     destR.x = x;
     destR.y = y;
     position.x = x;
@@ -17,7 +17,7 @@ object::object(int x,int y){
 }
 
 void object::render(){
-    SDL_Texture* temptex = texmanager::load_texture(this->texture);
+    SDL_Texture* temptex = Sprite.load_texture();
 
     float w,h;
     SDL_GetTextureSize(temptex,&w,&h);
@@ -29,7 +29,7 @@ void object::render(){
 }
 
 vec2 object::get_texture_dimensions(){
-    SDL_Texture* temptex = texmanager::load_texture(this->texture);
+    SDL_Texture* temptex = Sprite.load_texture();
     float w,h;
     SDL_GetTextureSize(temptex,&w,&h);
 

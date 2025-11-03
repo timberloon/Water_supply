@@ -5,7 +5,8 @@
 #include<SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
 #include<ctime>
-#include"graph.hpp"
+#include<vector>
+#include<utility>
 #include"texmanager.hpp"
 #include"vector2.hpp"
 #include"globals.hpp"

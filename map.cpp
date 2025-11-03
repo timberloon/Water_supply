@@ -1,5 +1,6 @@
 #include"map.hpp"
 #include"texmanager.hpp"
+#include"algorithms.hpp"
 
 int map1[20][25] = {
                     { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -75,6 +76,13 @@ void map::update_map(int x, int y, int house_w, int house_h) {
     int row = (y + house_h / 2) / 32;
 
     if (row >= 0 && row < 20 && col >= 0 && col < 25) mp[row][col] = 1;
+}
+
+void map::update_map(vec2 coords){
+    vec2 loc = coord_to_idx(coords.x,coords.y);
+    int row = (int)loc.x;
+    int col = (int)loc.y;
+    mp[row][col] = 1;
 }
 
 void map::show_map(){

@@ -5,7 +5,7 @@ background::background(){
     destR.w = window_width;
     destR.x = 0;
     destR.y = 0;
-    texture = "assets/water.png";
+    texture = background_image;
 
 }
 

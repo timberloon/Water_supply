@@ -33,7 +33,7 @@ bool sampler::check(std::vector<vec2>& houses,vec2 currpt){
     return true;
 }
 
-void sampler::poission_sampling(int tries,vector<vec2>& houses){
+void sampler::poission_sampling(int tries,std::vector<vec2>& houses){
     vec2 start((window_width/2)-house_dim.x/2,(window_height/2)-house_dim.y/2);
     active.push_back(start);
     houses.push_back(start);

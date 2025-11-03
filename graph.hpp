@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<vector>
 #include"list.hpp"
@@ -11,7 +12,7 @@ struct graphnode{
 
 class u_graph{
 private:
-    vector<graphnode*> nodes;
+    vector<std::unique_ptr<graphnode>> nodes;
     vector<bool> space;
     int curr;
 
@@ -21,11 +22,28 @@ public:
     ~u_graph();
 
     template<typename...args>
-    void add_node(char type,args...val);
-    void add_node(char type);
+    void add_node(char type,int idx,args...val);
+    void add_node(char type,int idx);
 
     template<typename... Args>
-    void make_connections(Args... args);
+    void make_connections(Args... args) {
+        vector<int> arguments = {args...};
+
+        for(int i=0;i<arguments.size();i++){
+            for(int j=i+1;j<arguments.size();j++){
+                int a = arguments[i];
+                int b = arguments[j];
+
+                if(space[a] && space[b]){
+                    nodes[a]->edges.insert_end(b);
+                    nodes[b]->edges.insert_end(a);
+                }
+                else{
+                    cout<< "invalid connection between " << a << " and " << b << endl;
+                }
+            }
+        }
+    }
     void make_connections();
 
     void delete_node(int id);

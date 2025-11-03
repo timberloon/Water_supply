@@ -3,7 +3,7 @@
 
 class map{
 private:
-    vector<SDL_Texture*> textures;
+    std::vector<SDL_Texture*> textures;
     SDL_FRect destR;
     public:
     int mp[20][25];
@@ -17,5 +17,6 @@ private:
     void draw_map();
     void update_map(int x,int y,int z);
     void update_map(int x, int y, int house_w, int house_h);
+    void update_map(vec2 coords);
     void show_map();
 };

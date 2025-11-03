@@ -6,7 +6,6 @@ sprite::sprite(){}
 sprite::sprite(const char* str){
     this->texture = str;
     this->tex_dimensions = get_image_dimensions(str);
-    destR.h = destR.w = 32;
     destR.x = destR.y = 0;
 }
 

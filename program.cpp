@@ -1,15 +1,19 @@
 #include"program.hpp"
+#include"graph.hpp"
 #include"map.hpp"
 #include"house.hpp"
 #include"sampler.hpp"
 #include"background.hpp"
 #include"algorithms.hpp"
 
+
 SDL_Renderer* program::renderer = nullptr;
 map* main_map;
 std::vector<house*> houses;
 sampler plotter;
 background* bg = new background();
+std::vector<int> input_buffer;
+u_graph game;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -41,7 +45,8 @@ void program::start(){
     vec2 house_dimensions = get_image_dimensions(house_texture);
     for(int i=0;i<house_coords.size();i++){
         houses.push_back(new house(i,house_coords[i].x,house_coords[i].y));
-        main_map->update_map((int)house_coords[i].x,(int)house_coords[i].y,house_dimensions.x,house_dimensions.y);
+        main_map->update_map(house_coords[i]);
+        game.add_node('h',i);
     }
 
     static_render();
@@ -52,11 +57,7 @@ void program::update(){
 }
 
 void program::render(){
-    // SDL_RenderClear(renderer);
-    // bg->draw();
-    // main_map->draw_map(); 
-    // for(house* h : houses)h->render();
-    // SDL_RenderPresent(renderer);
+
 }
 
 void program::static_render(){
@@ -81,10 +82,16 @@ void program::handle_events(){
             float x = event.button.x;
             float y = event.button.y;
             int h = house_clicked({x,y},houses);
-            if(h != -1) std::cout<< "clicked house no: " << h << '\n';
+            if(h != -1){
+                input_buffer.push_back(h);
+                if(input_buffer.size() >= 2){
+                    connect(game,input_buffer);
+                    input_buffer.clear();
+                }
+            }
             break;
     }
-
+    
 }
 
 void program::clean(){

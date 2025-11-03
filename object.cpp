@@ -19,11 +19,10 @@ object::object(int x,int y){
 void object::render(){
     SDL_Texture* temptex = Sprite.load_texture();
 
-    float w,h;
-    SDL_GetTextureSize(temptex,&w,&h);
+    float w = Sprite.tex_dimensions.x,h = Sprite.tex_dimensions.y;
     float ratio = (float) w/h;
-    destR.w = w*house_scale;
-    destR.h = h*house_scale;
+    destR.w = w;
+    destR.h = h;
 
     texmanager::draw(temptex,destR);
 }

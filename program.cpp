@@ -5,6 +5,8 @@
 #include"sampler.hpp"
 #include"background.hpp"
 #include"algorithms.hpp"
+#include"supplier.hpp"
+#include"text.hpp"
 
 
 SDL_Renderer* program::renderer = nullptr;
@@ -14,12 +16,15 @@ sampler plotter;
 background* bg = new background();
 std::vector<int> input_buffer;
 u_graph game;
+supplier* pump;
+text* txt;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
     this->renderer = nullptr;
     if(SDL_Init(SDL_INIT_VIDEO)){
         if(SDL_CreateWindowAndRenderer(title.c_str(),width,height,flag,&(this->window),&(this->renderer))){
+            TTF_Init();
             cout<< "Window created\n";
             this->running = true;
             SDL_SetRenderDrawColor(this->renderer,0,0,0,255);
@@ -43,11 +48,14 @@ void program::start(){
     std::vector<vec2> house_coords;
     plotter.poission_sampling(9,house_coords);
     vec2 house_dimensions = get_image_dimensions(house_texture);
-    for(int i=0;i<house_coords.size();i++){
-        houses.push_back(new house(i,house_coords[i].x,house_coords[i].y));
+    for(int i=0;i<house_coords.size()-1;i++){
+        int temp = (rand()%7)+1;
+        houses.push_back(new house(i,std::to_string(temp),house_coords[i].x,house_coords[i].y));
         main_map->update_map(house_coords[i]);
         game.add_node('h',i);
     }
+    pump = new supplier(house_coords[house_coords.size()-1].x,house_coords[house_coords.size()-1].y,(rand()%4)+1);
+    game.add_node('p',-1);
 
     static_render();
 }
@@ -65,6 +73,7 @@ void program::static_render(){
     bg->draw();
     main_map->draw_map(); 
     for(house* h : houses)h->render();
+    pump->render();
     SDL_RenderPresent(renderer);
 }
 

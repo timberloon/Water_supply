@@ -6,7 +6,7 @@ private:
     std::vector<SDL_Texture*> textures;
     SDL_FRect destR;
     public:
-    int mp[20][25];
+    std::vector<std::vector<int>> mp;
     SDL_Texture* green;
     SDL_Texture* blue;
     SDL_Texture* brown;

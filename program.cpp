@@ -7,17 +7,17 @@
 #include"algorithms.hpp"
 #include"supplier.hpp"
 #include"text.hpp"
-
+#include"pipe.hpp"
 
 SDL_Renderer* program::renderer = nullptr;
 map* main_map;
-std::vector<house*> houses;
+std::vector<object*> houses;
+std::vector<pipe*> pipes;
 sampler plotter;
 background* bg = new background();
 std::vector<int> input_buffer;
 u_graph game;
 supplier* pump;
-text* txt;
 
 void program::init(std::string title,int width,int height,SDL_WindowFlags flag){
     this->window = nullptr;
@@ -54,8 +54,10 @@ void program::start(){
         main_map->update_map(house_coords[i]);
         game.add_node('h',i);
     }
-    pump = new supplier(house_coords[house_coords.size()-1].x,house_coords[house_coords.size()-1].y,(rand()%4)+1);
-    game.add_node('p',-1);
+    pump = new supplier(house_coords[house_coords.size()-1].x,house_coords[house_coords.size()-1].y,(rand()%3)+1);
+    houses.push_back(pump);
+    game.add_node('s',houses.size()-1);
+    main_map->update_map(house_coords[house_coords.size()-1]);
 
     static_render();
 }
@@ -65,16 +67,21 @@ void program::update(){
 }
 
 void program::render(){
-
-}
-
-void program::static_render(){
     SDL_RenderClear(renderer);
     bg->draw();
     main_map->draw_map(); 
-    for(house* h : houses)h->render();
+    for(object* h : houses)h->render();
     pump->render();
     SDL_RenderPresent(renderer);
+}
+
+void program::static_render(){
+    // SDL_RenderClear(renderer);
+    // bg->draw();
+    // main_map->draw_map(); 
+    // for(object* h : houses)h->render();
+    // pump->render();
+    // SDL_RenderPresent(renderer);
 }
 
 void program::handle_events(){
@@ -94,7 +101,7 @@ void program::handle_events(){
             if(h != -1){
                 input_buffer.push_back(h);
                 if(input_buffer.size() >= 2){
-                    connect(game,input_buffer);
+                    connect(game,input_buffer,main_map->mp,houses);
                     input_buffer.clear();
                 }
             }

@@ -26,6 +26,7 @@ int map1[20][25] = {
 };
 
 map::map(){
+    mp = std::vector<std::vector<int>>(20, std::vector<int>(25, 0));
     destR.h = destR.w = 32;
     load_map(map1);
 
@@ -52,17 +53,19 @@ void map::draw_map(){
             destR.x = col*32;
             destR.y = row*32;
 
-            // switch(type){
-            // case 0:
-            //     texmanager::draw(blue,destR);
-            //     break;
-            // case 1:
-            //     texmanager::draw(brown,destR);
-            //     break;
-            // case 2:
-            //     texmanager::draw(green,destR);
-            //     break;
-            // }
+            if(type<0){
+                texmanager::draw(brown,destR);
+            }
+            else{
+                switch(type){
+                    case 0:
+                        // texmanager::draw(blue,destR);
+                        break;
+                    case 1:
+                        texmanager::draw(green,destR);
+                        break;
+                    }
+            }
         }
     }
 }

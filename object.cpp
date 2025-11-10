@@ -9,6 +9,7 @@ object::object(std::string str,std::string txt,int x,int y){
     position.y = y;
     vec2 dim = get_image_dimensions(str.c_str());
     this->txt = new text(txt,dim.x/2,dim.x/2);
+    map_pos = coord_to_idx(x,y);
 }
 
 object::object(std::string str,int x,int y){
@@ -17,6 +18,15 @@ object::object(std::string str,int x,int y){
     position.y = y;
     destR.x = x;
     destR.y = y;
+    map_pos = coord_to_idx(x,y);
+}
+
+object::object(int x,int y){
+    position.x = x;
+    position.y = y;
+    destR.x = x;
+    destR.y = y;
+    map_pos = coord_to_idx(x,y);
 }
 
 void object::render(){

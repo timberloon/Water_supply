@@ -8,3 +8,4 @@ constexpr const char* supplier_texture = "assets/temp.png";
 constexpr int letter_size = 25;
 constexpr SDL_Color font_color = {(Uint8)256,(Uint8)256,(Uint8)256,(Uint8)256};
 constexpr const char* font_path = "assets/fonts/Comic Sans MS 400.ttf";
+constexpr const char* pump_texture = "";

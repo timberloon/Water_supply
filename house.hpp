@@ -7,7 +7,7 @@ private:
     int h_no;
 public:
     text* req;
-    vec2 map_pos;
+    int recieving;
     house(int num,std::string str,int x,int y);
     void update() override;
 };

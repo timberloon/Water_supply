@@ -10,10 +10,12 @@ private:
     SDL_Texture* green;
     SDL_Texture* blue;
     SDL_Texture* brown;
+    SDL_Texture* sand[9];
+    SDL_Texture* ground[4];
 
     map();
     ~map();
-    void load_map(int arr[20][25]);
+    void load_map(int arr[maprows][mc]);
     void draw_map();
     void update_map(int x,int y,int z);
     void update_map(int x, int y, int house_w, int house_h);

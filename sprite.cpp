@@ -6,7 +6,8 @@ sprite::sprite(){}
 sprite::sprite(const char* str){
     this->texture = str;
     this->tex_dimensions = get_image_dimensions(str);
-    destR.x = destR.y = 0;
+    destR.x = (0-tex_dimensions.x)/2;
+    destR.y = (0-tex_dimensions.y)/2;
 }
 
 SDL_Texture* sprite::load_texture(){

@@ -46,7 +46,7 @@ void program::start(){
     main_map = new map();
     srand(time(NULL));
     std::vector<vec2> house_coords;
-    plotter.poission_sampling(9,house_coords);
+    plotter.poission_sampling(5,house_coords);
     vec2 house_dimensions = get_image_dimensions(house_texture);
     for(int i=0;i<house_coords.size()-1;i++){
         int temp = (rand()%7)+1;
@@ -63,7 +63,7 @@ void program::start(){
 }
 
 void program::update(){
-    
+    for(object* h : houses) h->update();
 }
 
 void program::render(){
@@ -101,7 +101,7 @@ void program::handle_events(){
             if(h != -1){
                 input_buffer.push_back(h);
                 if(input_buffer.size() >= 2){
-                    connect(game,input_buffer,main_map->mp,houses);
+                    connect(game,input_buffer,main_map->mp,houses,pipes);
                     input_buffer.clear();
                 }
             }

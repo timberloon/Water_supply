@@ -35,8 +35,8 @@ public:
                 int b = arguments[j];
 
                 if(space[a] && space[b]){
-                    nodes[a]->edges.insert_end(b);
-                    nodes[b]->edges.insert_end(a);
+                    nodes[a]->edges.insert_head(b);
+                    nodes[b]->edges.insert_head(a);
                 }
                 else{
                     cout<< "invalid connection between " << a << " and " << b << endl;

@@ -13,6 +13,9 @@ text::text(std::string words,int x,int y){
     this->rect.y = y;
     this->writeup = words;
 
+    position.x = x;
+    position.y = y;
+
     create_tex();
 }
 
@@ -27,4 +30,12 @@ void text::create_tex(){
 
 void text::draw(){
     texmanager::draw(this->texture,this->rect);
+}
+
+void text::update(){
+    draw();
+}
+
+void text::change_text(std::string str){
+    this->writeup = str;
 }

@@ -7,5 +7,5 @@ private:
 public:
     int supply;
     supplier(int num,int x,int y);
-    void update();
+    void update() override;
 };

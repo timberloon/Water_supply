@@ -17,10 +17,10 @@ vec2 get_image_dimensions(const char* str){
 vec2 coord_to_idx(int x,int y){
     vec2 house_dim = get_image_dimensions(house_texture);
 
-    float col = (x + house_dim.x / 2) / 32;
-    float row = (y + house_dim.y / 2) / 32;
+    float col = (x + house_dim.x / 2) / mapscale;
+    float row = (y + house_dim.y / 2) / mapscale;
 
-    if (row >= 0 && row < 20 && col >= 0 && col < 25)return {row,col};
+    if (row >= 0 && row < maprows && col >= 0 && col < mc)return {row,col};
     else return {-1.f,-1.f};
 }
 
@@ -39,7 +39,7 @@ void connect(u_graph& game,const std::vector<int>& chosen,std::vector<std::vecto
     int pipe = get_pipe_id();
     pathfind(map,(int)objects[chosen[0]]->map_pos.x,(int)objects[chosen[0]]->map_pos.y,(int)objects[chosen[1]]->map_pos.x,(int)objects[chosen[1]]->map_pos.y,pipe);
     game.add_node('p',pipe);
-    game.make_connections(pipe,chosen[0],chosen[1]);
+    // game.make_connections(pipe,chosen[0],chosen[1]);
     std::cout<< "connecting: " << (int)objects[chosen[0]]->map_pos.x << ' ' << (int)objects[chosen[0]]->map_pos.y << ' ' << (int)objects[chosen[1]]->map_pos.x << ' ' << (int)objects[chosen[1]]->map_pos.y << '\n';
 }
 
@@ -59,7 +59,7 @@ bool isValid(int x, int y,
         return !visited[x][y];
 
     // Everything else must not be 1 and not visited
-    return (maze[x][y] != 1 && !visited[x][y]);
+    return (maze[x][y] != 100 && !visited[x][y]);
 }
 
 void pathfind(vector<vector<int>> &maze, int start_x, int start_y, int target_x, int target_y,int mark){

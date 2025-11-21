@@ -6,8 +6,7 @@ class house : public object{
 private: 
     int h_no;
 public:
-    text* req;
-    int recieving;
+    int in;
     house(int num,std::string str,int x,int y);
     void update() override;
 };

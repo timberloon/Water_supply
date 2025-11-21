@@ -11,7 +11,10 @@ class text{
     std::string writeup;
 
 public:
+    vec2 position;
     text(std::string words,int x,int y);
     void create_tex();
     void draw();
+    void update();
+    void change_text(std::string str);
 };

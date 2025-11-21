@@ -5,4 +5,6 @@ supplier::supplier(int x,int y,int num) : object(std::to_string(num),x,y) {
     this->Sprite = new sprite(supplier_texture);
 }
 
-void supplier::update(){}
+void supplier::update(){
+    this->txt->update();
+}

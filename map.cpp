@@ -162,3 +162,10 @@ void map::show_map(){
         std::cout<< '\n';
     }
 }
+
+int map::gettile(int x,int y){  
+    vec2 temp = coord_to_idx(x,y);
+    int cx = static_cast<int>(temp.x);
+    int cy = static_cast<int>(temp.y);
+    return mp[cx-1][cy-1];
+}

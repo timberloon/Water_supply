@@ -1,8 +1,10 @@
 #include"algorithms.hpp"
+#include"house.hpp"
+#include"supplier.hpp"
 #include<queue>
 
-static int pipe_id = -1;
 static int get_pipe_id(){
+    static int pipe_id = -1;
     return pipe_id--;
 }
 
@@ -34,13 +36,26 @@ int house_clicked(vec2 coords,std::vector<object*>& houses){
     return -1;
 }
 
-void connect(u_graph& game,const std::vector<int>& chosen,std::vector<std::vector<int>>& map,std::vector<object*>& objects,std::vector<pipe*> pipes){
+void connect(u_graph& game,const std::vector<int>& chosen,std::vector<std::vector<int>>& map,std::vector<object*>& objects,std::vector<pipe*>& pipes){
+    if(chosen[0] == chosen[1]) return;
+    if(game.check_connections(chosen[0],chosen[1])) return;
     game.make_connections(chosen[0],chosen[1]);
-    int pipe = get_pipe_id();
-    pathfind(map,(int)objects[chosen[0]]->map_pos.x,(int)objects[chosen[0]]->map_pos.y,(int)objects[chosen[1]]->map_pos.x,(int)objects[chosen[1]]->map_pos.y,pipe);
-    game.add_node('p',pipe);
-    // game.make_connections(pipe,chosen[0],chosen[1]);
-    std::cout<< "connecting: " << (int)objects[chosen[0]]->map_pos.x << ' ' << (int)objects[chosen[0]]->map_pos.y << ' ' << (int)objects[chosen[1]]->map_pos.x << ' ' << (int)objects[chosen[1]]->map_pos.y << '\n';
+    house* h = dynamic_cast<house*>(objects[chosen[1]]);
+    supplier* s = dynamic_cast<supplier*>(objects[chosen[0]]);
+    int temp = 0;
+    if(s){
+        h->in += s->supply;
+        temp = s->supply;
+    }
+    else{
+        house* second = dynamic_cast<house*>(objects[chosen[0]]);
+        h->in += second->in;
+        temp = second->in;
+    }
+    int currpipeid = get_pipe_id();
+    pipe* newpipe = new pipe("0",0,0,1,chosen[0],chosen[1],currpipeid,temp);
+    pipes.push_back(newpipe);
+    pathfind(map,(int)objects[chosen[0]]->map_pos.x,(int)objects[chosen[0]]->map_pos.y,(int)objects[chosen[1]]->map_pos.x,(int)objects[chosen[1]]->map_pos.y,currpipeid);
 }
 
 bool isValid(int x, int y,
@@ -54,18 +69,15 @@ bool isValid(int x, int y,
     if (x < 0 || x >= n || y < 0 || y >= m)
         return false;
 
-    // Allow start and target cells even if they are '1'
     if ((x == start_x && y == start_y) || (x == target_x && y == target_y))
         return !visited[x][y];
 
-    // Everything else must not be 1 and not visited
     return (maze[x][y] != 100 && !visited[x][y]);
 }
 
 void pathfind(vector<vector<int>> &maze, int start_x, int start_y, int target_x, int target_y,int mark){
     int n = maze.size(), m = maze[0].size();
 
-    // Directions: up, down, left, right
     int dx[4] = {-1, 1, 0, 0};
     int dy[4] = {0, 0, -1, 1};
 
@@ -109,20 +121,19 @@ void pathfind(vector<vector<int>> &maze, int start_x, int start_y, int target_x,
         return;
     }
 
-    // Mark path with 2
     pair<int, int> curr = {target_x, target_y};
     while (curr.first != -1)
     {
         maze[curr.first][curr.second] = mark;
         curr = parent[curr.first][curr.second];
     }
+}
 
-    // // Print maze with path
-    // cout << "Maze with path marked (2 = path):\n";
-    // for (auto &row : maze)
-    // {
-    //     for (auto &cell : row)
-    //         cout << cell << " ";
-    //     cout << "\n";
-    // }
+void addmult(int pipeid,float mult,const std::vector<object*>& houses,const std::vector<pipe*>& pipes){
+    int pipeno = -1;
+    for(auto p : pipes){
+        if(p->id == pipeid){
+            p->addmux(houses,mult);
+        }
+    }
 }

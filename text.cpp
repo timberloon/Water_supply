@@ -1,8 +1,8 @@
 #include"text.hpp"
 
-text::text(std::string words,int x,int y){
+text::text(std::string words,int x,int y,SDL_Color clr){
     this->text_size = letter_size;
-    this->text_color = font_color;
+    this->text_color = clr;
     
     this->font = nullptr;
     this->font = TTF_OpenFont(font_path,text_size);
@@ -21,7 +21,7 @@ text::text(std::string words,int x,int y){
 
 void text::create_tex(){
     SDL_Surface* surf = TTF_RenderText_Blended(font,writeup.c_str(),writeup.length(),text_color);
-    if(!surf) std::cout<< "Failed to load surface\n";
+    if(!surf) std::cout<< "Failed to load text surface\n";
     this->rect.h = surf->h;
     this->rect.w = surf->w;
     this->texture = texmanager::load_texture_from_surface(surf);
@@ -33,6 +33,7 @@ void text::draw(){
 }
 
 void text::update(){
+    create_tex();
     draw();
 }
 

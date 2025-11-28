@@ -12,7 +12,7 @@ class text{
 
 public:
     vec2 position;
-    text(std::string words,int x,int y);
+    text(std::string words,int x,int y,SDL_Color clr);
     void create_tex();
     void draw();
     void update();

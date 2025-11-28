@@ -66,3 +66,7 @@ void u_graph::re_size(){
     space.resize(space.size()*2);
     for(int i=temp;i<space.size();i++) space[i] = false;
 }
+
+bool u_graph::check_connections(int id1,int id2){
+    return nodes[id1]->edges.find(id2);
+}

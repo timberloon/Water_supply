@@ -21,4 +21,5 @@ private:
     void update_map(int x, int y, int house_w, int house_h);
     void update_map(vec2 coords);
     void show_map();
+    int gettile(int x,int y);
 };

@@ -3,7 +3,7 @@
 sampler::sampler(){
     rad = 150;
     k = 100;
-    house_dim = get_image_dimensions("assets/house3.png");
+    house_dim = get_image_dimensions(house_texture);
 }
 
 sampler::~sampler(){}

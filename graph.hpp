@@ -50,4 +50,5 @@ public:
     void delete_connection(int v1,int v2);
 
     void show_connections(int id);
+    bool check_connections(int id1,int id2);
 };
